@@ -17,7 +17,7 @@ class Attendance extends Controller
         $rest = $attendance->rests->whereNull("end_time")->first();
 
         if ($attendance->end_time) {
-            return view('index')->with([
+            return view('attendance.create')->with([
                 "is_attendance_start" => true,
                 "is_attendance_end" => true,
             ]);

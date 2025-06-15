@@ -15,7 +15,7 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/attendance', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::get('/attendance', [AttendanceController::class, 'showAttendance'])->name('attendance.create');
     // 勤怠登録画面表示
     Route::get('/attendance/start', [AttendanceController::class, 'startAttendance']);
     // 勤務開始処理
@@ -27,10 +27,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/break/end', [RestController::class, 'endRest']);
     // 休憩終了処理
 
-    Route::get('/attendance/list', [ListController::class, 'getList']);
+    Route::get('/attendance/list', [ListController::class, 'getList'])->name('attendance.list');
     // 勤怠一覧画面表示
     Route::get('/attendance/{id}', [ListController::class, 'detail']);
     // 勤怠詳細画面表示
+
+    // 勤怠修正処理
+    Route::get('/attendance/{id}', [ListController::class, 'getRequest'])->name('attendance.request_list');
+    // 申請一覧画面表示
 });
 // 一般ユーザー用のミドルウェア
 
