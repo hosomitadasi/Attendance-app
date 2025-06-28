@@ -6,14 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAttendancesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        Schema::create('attendance', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->constrained()->onDelete('cascade');
             $table->date('date');
@@ -24,11 +20,6 @@ class CreateAttendancesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('attendance');

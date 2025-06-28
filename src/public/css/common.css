@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+}
+
+.header__logo {
+    width: 250px;
+    height: fit-content;
+    vertical-align: middle;
+}
+
+.header__nav {
+    display: flex;
+}
+
+.header__nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.header__nav li {
+    margin-right: 30px;
+}
+
+.header__nav li:hover {
+    font-weight: bold;
+}
+
+.header__logout {
+    color: #fff;
+    font-size: 16px;
+}
+
+.header__logout:hover {
+    font-weight: bold;
+}
+
+.header__btn {
+    background-color: #fff;
+    border-radius: 4px;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.header__btn:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+}
