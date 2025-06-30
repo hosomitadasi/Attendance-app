@@ -74,5 +74,8 @@ class AttendanceController extends Controller
     }
     // 「退勤」ボタンを押したときの動作。
 
-    public function getList() {}
+    public function getList()
+    {
+        return view('attendance.list');
+    }
 }

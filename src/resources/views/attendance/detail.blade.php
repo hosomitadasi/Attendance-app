@@ -17,27 +17,27 @@
         <table class="detail-table">
             <tr>
                 <th>名前</th>
-                <td>{{ $user->name }}</td>
+                <td>データベースからユーザーの名前を取得する</td>
             </tr>
             <tr>
                 <th>日付</th>
-                <td>{{ $attendance->date->format('Y年n月j日') }}</td>
+                <td>実際の日付を表示していく</td>
             </tr>
             <tr>
                 <th>出勤・退勤</th>
-                <td>{{ $attendance->start_time }} ～ {{ $attendance->end_time }}</td>
+                <td>出勤ボタンを押した時間 ～ 退勤ボタンを押した時間</td>
             </tr>
 
-            @foreach ($attendance->rests as $index => $rest)
+            @foreach
             <tr>
-                <th>休憩{{ $index + 1 }}</th>
-                <td>{{ $rest->start_time }} ～ {{ $rest->end_time }}</td>
+                <th>休憩</th>
+                <td>休憩入ボタンを押した時間 ～ 休憩戻ボタンを押した時間</td>
             </tr>
             @endforeach
 
             <tr>
                 <th>備考</th>
-                <td>{{ $attendance->note }}</td>
+                <td>備考欄</td>
             </tr>
         </table>
         <div class="detail-button">

@@ -7,13 +7,27 @@ use Illuminate\Http\Request;
 
 class AdminStaffController extends Controller
 {
-    public function getStaffList() {}
+    public function getStaffList()
+    {
+        return view('admin.staff_list');
+    }
 
-    public function getAttendance() {}
+    public function getAttendance()
+    {
+        return view('admin.staff_attendance');
+    }
 
-    public function getList() {}
+    public function getList()
+    {
+        return view('admin.attendance_list');
+    }
 
-    public function getDetail() {}
+    public function getDetail()
+    {
+        return view('admin.attendance_detail');
+    }
 
-    public function corrective() {}
+    public function corrective()
+    {
+    }
 }

@@ -26,23 +26,23 @@
 
     <div class="text-container">
         @if ($status === 'before_work')
-        <form action="{{ route('attendance.start') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <button type="submit">出勤</button>
         </form>
 
         @elseif ($status === 'working')
-        <form action="{{ route('attendance.end') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <button type="submit">退勤</button>
         </form>
-        <form action="{{ route('rest.start') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <button type="submit">休憩入</button>
         </form>
 
         @elseif ($status === 'resting')
-        <form action="{{ route('rest.end') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <button type="submit">休憩戻</button>
         </form>
@@ -53,5 +53,4 @@
     </div>
 
 </div>
-
 @endsection

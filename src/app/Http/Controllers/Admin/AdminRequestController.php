@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class AdminRequestController extends Controller
 {
-    public function getRequest() {}
+    public function getRequest()
+    {
+        return view('admin.request_list');
+    }
 
-    public function getApprove() {}
+    public function getApprove()
+    {
+        return view('admin.request_approve');
+    }
 
     public function approve() {}
 }
