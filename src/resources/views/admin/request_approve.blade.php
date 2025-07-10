@@ -3,7 +3,7 @@
 @section('title','申請承認ページ')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('/css/detail.css')  }}">
+<link rel="stylesheet" href="{{ asset('/css/request.css')  }}">
 @endsection
 
 @section('content')

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Actions\Fortify\CreateNewUser;
 
 class RegisteredUserController extends Controller
@@ -12,10 +12,8 @@ class RegisteredUserController extends Controller
         Request $request,
         CreateNewUser $creator
     ) {
-        $user = $creator->create($request->all());
-
-        Auth::login($user);
-
-        return redirect()->route('attendance.create');
+        event(new Registered($user = $creator->create($request->all())));
+        session()->put('unauthenticated_user', $user);
+        return redirect()->route('verification.notice');
     }
 }

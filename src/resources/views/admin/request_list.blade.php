@@ -1,22 +1,22 @@
-@extends('layouts')
+@extends('layouts.de')
 
 @section('title','申請一覧ページ（管理者）')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('/css/request.css')  }}">
+<link rel="stylesheet" href="{{ asset('/css/list.css')  }}">
 @endsection
 
 @section('content')
 @include('components.header')
-<div class="container">
-    <h2>申請一覧</h2>
+<div class="center">
+    <h2 class="list__title"><span>|</span>申請一覧</h2>
 
-    <div class="tab-switcher">
-        <a href="?status=pending" class="{{ $status == 'pending' ? 'active' : '' }}">承認待ち</a>
-        <a href="?status=approved" class="{{ $status == 'approved' ? 'active' : '' }}">承認済み</a>
+    <div class="list__tabs">
+        <span class="list__tab list__tab--active">承認待ち</span>
+        <span class="list__tab">承認済み</span>
     </div>
 
-    <table class="list-table">
+    <table class="list__table">
         <thead>
             <tr>
                 <th>状態</th>
@@ -28,16 +28,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($requests as $request)
             <tr>
-                <td>{{ $request->status == 'pending' ? '承認待ち' : '承認済み' }}</td>
-                <td>{{ $request->user->name }}</td>
-                <td>{{ $request->attendance->date->format('Y/m/d') }}</td>
-                <td>{{ $request->reason }}</td>
-                <td>{{ $request->created_at->format('Y/m/d') }}</td>
-                <td><a href="{{ route('request.detail', $request->id) }}">詳細</a></td>
+                <td>承認待ち</td>
+                <td>西伶奈</td>
+                <td>2023/06/01</td>
+                <td>遅延のため</td>
+                <td>2023/06/02</td>
+                <td><a href="#">詳細</a></td>
             </tr>
-            @endforeach
         </tbody>
     </table>
 </div>

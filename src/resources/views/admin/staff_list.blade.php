@@ -1,6 +1,6 @@
-@extends('layouts')
+@extends('layouts.default')
 
-@section('title','スタッフ一覧ページ（管理者）')
+@section('title','スタッフ一覧画面（管理者）')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/list.css')  }}">
@@ -8,23 +8,20 @@
 
 @section('content')
 @include('components.header')
-<div class="container">
-    <h2>スタッフ一覧</h2>
+<div class="center">
+    <h2 class="list__title"><span>|</span>スタッフ一覧</h2>
 
-    <div class="list-table">
+    <div class="list__table">
         <table>
             <tr>
                 <th>名前</th>
                 <th>メールアドレス</th>
-                <th>月次詳細</th>
+                <th>月次勤怠</th>
             </tr>
-            @foreach()
+            @foreach($users as $user)
             <tr>
                 <td>{{}}</td>
                 <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td></td>
                 <td><a href="{{ route('admin.attendance.detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach

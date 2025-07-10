@@ -1,6 +1,6 @@
 @extends('layouts')
 
-@section('title','スタッフ別勤怠一覧ページ（管理者）')
+@section('title','スタッフ別勤怠一覧画面（管理者）')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/list.css')  }}">
@@ -8,31 +8,32 @@
 
 @section('content')
 @include('components.header')
-<div class="container">
-    <h2>ユーザーの名前</h2>
-    <div class="month-switcher">
-        <a href="?month={{ $prevMonth }}">← 前月</a>
-        <span>{{ $currentMonth->format('Y/m') }}</span>
-        <a href="?month={{ $nextMonth }}">翌月 →</a>
+<div class="center">
+    <h2 class="list__title"><span>|</span>さんの勤怠</h2>
+
+    <div class="list__header">
+        <a href="#" class="list__prev">←前月</a>
+        <span class="list__month">2023/06</span>
+        <a href="#" class="list__next">翌月→</a>
     </div>
 
     <div class="list-table">
         <table>
             <tr>
-                <th>日付</th>
+                <th>名前</th>
                 <th>出勤</th>
                 <th>退勤</th>
                 <th>休憩</th>
                 <th>合計</th>
                 <th>詳細</th>
             </tr>
-            @foreach($attendances as $attendance)
+            @foreach()
             <tr>
                 <td>{{}}</td>
                 <td>{{}}</td>
                 <td>{{}}</td>
                 <td>{{}}</td>
-                <td></td>
+                <td>{{}}</td>
                 <td><a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach

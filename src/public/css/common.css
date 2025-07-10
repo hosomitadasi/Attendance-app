@@ -6,6 +6,20 @@ body {
     width: 100vw;
 }
 
+header {
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 30px;
+    position: sticky;
+    z-index: var(--mer-z-index-navigation-top);
+    top: 0px;
+}
+
 .header__logo {
     width: 250px;
     height: fit-content;
@@ -49,4 +63,29 @@ body {
 .header__btn:hover {
     opacity: 0.8;
     transition: 0.3s;
+}
+
+.btn{
+    display: flex;
+        align-items: center;
+        background-color: #000000;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: bold;
+        justify-content: center;
+        width: 450px;
+        height: 45px;
+}
+
+.btn--big{
+    width: 100%;
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+
+.center {
+    width: 680px;
+    margin: 0 auto;
+    padding: 50px 0;
 }
