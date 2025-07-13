@@ -1,56 +1,49 @@
-@extends('layouts')
+@extends('layouts.default')
 
-@section('title','勤怠ページ')
+@section('title', '勤怠登録')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('/css/attendance.css')  }}">
+<link rel="stylesheet" href="{{ asset('/css/attendance.css') }}">
 @endsection
 
 @section('content')
 @include('components.header')
-<div class="container">
-    <div>
-        @if ($status === 'before_work')
-        <p>勤務外</p>
-        @elseif ($status === 'working')
-        <p>出勤中</p>
-        @elseif ($status === 'resting')
-        <p>休憩中</p>
-        @elseif ($status === 'after_work')
-        <p>退勤済</p>
-        @endif
+<div class="center">
+    {{-- 勤務状態ラベル --}}
+    <div class="status-label">
+        <span class="status status--{{ $status }}">{{ $statusLabel }}</span>
     </div>
 
-    <h1>日付</h1>
-    <h2>現在時刻</h2>
+    {{-- 日付 --}}
+    <p class="page__title">{{ $date }}</p>
 
-    <div class="text-container">
-        @if ($status === 'before_work')
-        <form action="" method="POST">
-            @csrf
-            <button type="submit">出勤</button>
-        </form>
+    {{-- 時刻 --}}
+    <h1 class="clock-time">{{ $time }}</h1>
 
-        @elseif ($status === 'working')
-        <form action="" method="POST">
+    {{-- ボタン表示（勤務ステータスによって切り替え） --}}
+    <div class="btn-group">
+        @if ($status === '未出勤')
+        <form action="{{ route('attendance.start') }}" method="POST">
             @csrf
-            <button type="submit">退勤</button>
+            <button class="btn">出勤</button>
         </form>
-        <form action="" method="POST">
+        @elseif ($status === '出勤中')
+        <form action="{{ route('attendance.end') }}" method="POST">
             @csrf
-            <button type="submit">休憩入</button>
+            <button class="btn">退勤</button>
         </form>
-
-        @elseif ($status === 'resting')
-        <form action="" method="POST">
+        <form action="{{ route('attendance.break_start') }}" method="POST">
             @csrf
-            <button type="submit">休憩戻</button>
+            <button class="btn">休憩入</button>
         </form>
-
-        @elseif ($status === 'after_work')
-        <p>お疲れ様でした</p>
+        @elseif ($status === '休憩中')
+        <form action="{{ route('attendance.break_end') }}" method="POST">
+            @csrf
+            <button class="btn">休憩戻</button>
+        </form>
+        @elseif ($status === '退勤済')
+        <p class="thanks-message">お疲れ様でした。</p>
         @endif
     </div>
-
 </div>
 @endsection

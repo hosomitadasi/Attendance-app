@@ -1,4 +1,4 @@
-@extends('layouts.de')
+@extends('layouts.default')
 
 @section('title','申請一覧ページ（管理者）')
 

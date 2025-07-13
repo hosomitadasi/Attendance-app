@@ -24,6 +24,6 @@ class CreateEditRequestsTable extends Migration
 
     public function down()
     {
-        //
+        Schema::dropIfExists('edit_requests');
     }
 }

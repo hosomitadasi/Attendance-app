@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('layouts.default')
 
 @section('title','申請承認ページ')
 
@@ -8,10 +8,7 @@
 
 @section('content')
 @include('components.header')
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
+<div class="center">
     <h2>勤怠詳細</h2>
     <form>
         <table class="detail-table">

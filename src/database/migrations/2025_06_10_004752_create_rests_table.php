@@ -9,9 +9,9 @@ class CreateRestsTable extends Migration
 
     public function up()
     {
-        Schema::create('rest', function (Blueprint $table) {
+        Schema::create('rests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('attendance_id')->constrained()->onDelete('cascade');
+            $table->foreignId('attendance_id')->constrained()->onDelete('cascade');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->timestamps();

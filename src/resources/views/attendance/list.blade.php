@@ -17,7 +17,7 @@
         <a href="#" class="list__next">翌月→</a>
     </div>
 
-    <div class="list-table">
+    <div class="list__table">
         <table>
             <tr>
                 <th>名前</th>
@@ -40,5 +40,4 @@
         </table>
     </div>
 </div>
-
 @endsection

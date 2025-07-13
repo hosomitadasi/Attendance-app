@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UsersSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
 
     public function run()
@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            User::created([
+            User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make('password123'),

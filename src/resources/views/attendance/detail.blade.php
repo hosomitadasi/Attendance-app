@@ -1,48 +1,37 @@
-@extends('layouts')
+@extends('layouts.default')
 
-@section('title','勤怠詳細ページ（ユーザー）')
+@section('title', '勤怠詳細画面（一般ユーザー）')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('/css/request.css')  }}">
+<link rel="stylesheet" href="{{ asset('/css/request.css') }}">
 @endsection
 
 @section('content')
 @include('components.header')
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <h2>勤怠詳細</h2>
+<div class="center">
     <form>
-        <table class="detail-table">
+        <h2 class="list__title"><span>|</span>勤怠詳細</h2>
+        <table>
             <tr>
                 <th>名前</th>
-                <td>データベースからユーザーの名前を取得する</td>
-            </tr>
-            <tr>
                 <th>日付</th>
-                <td>実際の日付を表示していく</td>
-            </tr>
-            <tr>
                 <th>出勤・退勤</th>
-                <td>出勤ボタンを押した時間 ～ 退勤ボタンを押した時間</td>
-            </tr>
-
-            @foreach
-            <tr>
                 <th>休憩</th>
-                <td>休憩入ボタンを押した時間 ～ 休憩戻ボタンを押した時間</td>
+                <th>休憩２</th>
+                <th>備考</th>
+            </tr>
+            @foreach()
+            <tr>
+                <td>{{}}</td>
+                <td>{{}}</td>
+                <td>{{}}</td>
+                <td>{{}}</td>
+                <td>{{}}</td>
+                <td></td>
             </tr>
             @endforeach
-
-            <tr>
-                <th>備考</th>
-                <td>備考欄</td>
-            </tr>
         </table>
-        <div class="detail-button">
-            <button>修正</button>
-        </div>
+        <button></button>
     </form>
 </div>
 @endsection

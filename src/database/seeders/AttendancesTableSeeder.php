@@ -7,7 +7,7 @@ use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
 
-class AttendanceSeeder extends Seeder
+class AttendancesTableSeeder extends Seeder
 {
     public function run()
     {
