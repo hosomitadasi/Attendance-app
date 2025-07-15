@@ -10,13 +10,11 @@
 @include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>さんの勤怠</h2>
-
     <div class="list__header">
         <a href="#" class="list__prev">←前月</a>
         <span class="list__month">2023/06</span>
         <a href="#" class="list__next">翌月→</a>
     </div>
-
     <div class="list__table">
         <table>
             <tr>

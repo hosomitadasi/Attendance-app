@@ -1,4 +1,4 @@
-@extends('layouts.de')
+@extends('layouts.default')
 
 @section('title','申請一覧ページ（一般ユーザー）')
 
@@ -10,12 +10,10 @@
 @include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>申請一覧</h2>
-
     <div class="list__tabs">
         <span class="list__tab list__tab--active">承認待ち</span>
         <span class="list__tab">承認済み</span>
     </div>
-
     <table class="list__table">
         <thead>
             <tr>

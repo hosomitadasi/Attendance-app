@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('layouts.default')
 
 @section('title','勤怠一覧画面（一般ユーザー）')
 
@@ -10,13 +10,11 @@
 @include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>勤怠一覧</h2>
-
     <div class="list__header">
         <a href="#" class="list__prev">←前月</a>
         <span class="list__month">2023/06</span>
         <a href="#" class="list__next">翌月→</a>
     </div>
-
     <div class="list__table">
         <table>
             <tr>

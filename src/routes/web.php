@@ -6,19 +6,33 @@ use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RestController;
+use Illuminate\Http\Request;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Requests\EmailVerificationRequest;
 
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
 // ログイン画面（一般ユーザー）
 Route::post('/register', [RegisteredUserController::class, 'store']);
 // 会員登録画面（一般ユーザー）
 
-Route::middleware(['auth'])->group(function () {
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    session()->get('unauthenticated_user')->sendEmailVerificationNotification();
+    session()->put('resent', true);
+    return back()->with('message', 'Verification link sent!');
+})->name('verification.send');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    session()->forget('unauthenticated_user');
+    return redirect('/attendance/create');
+})->name('verification.verify');
+
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/attendance', [AttendanceController::class, 'getCreate'])->name('attendance.create');
     // 勤怠登録画面（一般ユーザー）

@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Attendance;
 use App\Models\EditRequest;
 
-class EditRequestSeeder extends Seeder
+class EditRequestsTableSeeder extends Seeder
 {
     public function run()
     {

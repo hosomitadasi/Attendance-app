@@ -10,7 +10,6 @@
 @include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>スタッフ一覧</h2>
-
     <div class="list__table">
         <table>
             <tr>
@@ -22,7 +21,7 @@
             <tr>
                 <td>{{}}</td>
                 <td>{{}}</td>
-                <td><a href="{{ route('admin.attendance.detail', $attendance->id) }}">詳細</a></td>
+                <td><a href="{{ route('admin.attendance_detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach
         </table>
