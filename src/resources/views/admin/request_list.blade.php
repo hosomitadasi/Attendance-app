@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title','申請一覧ページ（管理者）')
+@section('title','申請一覧画面（管理者）')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/list.css')  }}">
@@ -29,12 +29,14 @@
         </thead>
         <tbody>
             <tr>
+                @foreach($editRequests as $$editRequest)
                 <td>承認待ち</td>
-                <td>西伶奈</td>
-                <td>2023/06/01</td>
-                <td>遅延のため</td>
-                <td>2023/06/02</td>
+                <td>$editRequest->user->name</td>
+                <td>$editRequest->attendance->date</td>
+                <td>$editRequest->reason</td>
+                <td>$editRequest->created_at</td>
                 <td><a href="#">詳細</a></td>
+                @endforeach
             </tr>
         </tbody>
     </table>

@@ -28,10 +28,10 @@
 
                     <th>備考</th>
                 </tr>
-                @foreach()
+                @foreach($attendances as $attendance)
                 <tr>
                     <td>
-                        {{ $attendance->user->name }}
+                        {{ $attendance->users->name }}
                     </td>
 
                     <td>

@@ -9,7 +9,7 @@
 @section('content')
 @include('components.header')
 <div class="center">
-    <h2 class="list__title"><span>|</span>勤怠一覧</h2>
+    <h2 class="list__title"><span>|</span>＜日付を出力＞の勤怠</h2>
 
     <div class="list__header">
         <a href="#" class="list__prev">←前月</a>
@@ -27,13 +27,13 @@
                 <th>合計</th>
                 <th>詳細</th>
             </tr>
-            @foreach()
+            @foreach($attendances as $attendance)
             <tr>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
+                <td>{{ $attendance->users->name }}</td>
+                <td>{{ $attendance->start_time }}</td>
+                <td>{{ $attendance->end_time }}</td>
+                <td>{{ $attendance->rest_sum }}</td>
+                <td>{{ $attendance->work_time }}</td>
                 <td><a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach

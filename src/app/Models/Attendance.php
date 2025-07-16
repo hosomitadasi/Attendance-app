@@ -15,12 +15,12 @@ class Attendance extends Model
 
     public function rests()
     {
-        return $this->hasMany('App\Models\Rest');
+        return $this->hasMany(Rest::class);
     }
 
     public function users()
     {
-        return $this->belongsTo('App\Models\User', "user_id");
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public static function getAttendance()

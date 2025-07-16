@@ -25,13 +25,13 @@
                 <th>合計</th>
                 <th>詳細</th>
             </tr>
-            @foreach()
+            @foreach($attendances as attendance)
             <tr>
                 <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
+                <td>{{ $attendance->start_time }}</td>
+                <td>{{ $attendance->end_time }}</td>
+                <td>{{ $attendance->rest_sum }}</td>
+                <td>{{ $attendance->work_time }}</td>
                 <td><a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach

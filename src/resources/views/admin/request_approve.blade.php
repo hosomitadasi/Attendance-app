@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title','申請承認ページ')
+@section('title','修正申請承認画面（管理者）')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/request.css') }}">
@@ -27,49 +27,30 @@
 
                     <th>備考</th>
                 </tr>
-                @foreach($attendances as $attendance)
+                @foreach($editRequests as $$editRequest)
                 <tr>
                     <td>
-                        {{ $attendance->user->name }}
+                        {{ $editRequest->user->name }}
                     </td>
 
                     <td>
-                        {{ \Carbon\Carbon::parse($attendance->date)->format('Y年 m月d日') }}
+                        {{ \Carbon\Carbon::parse(	$editRequest->attendance->date)->format('Y年 m月d日') }}
                     </td>
 
                     <td>
-                        @if($attendance->status === 'pending')
-                        {{ $attendance->start_time }} ～ {{ $attendance->end_time }}
-                        @else
-                        <input type="time" name="start_time" value="{{ $attendance->start_time }}" class="request__input-time"> ～
-                        <input type="time" name="end_time" value="{{ $attendance->end_time }}" class="request__input-time">
-                        @endif
+                        {{ $editRequest->new_start_time  }} ～ {{ $editRequest->new_end_time }}
                     </td>
 
                     <td>
-                        @if($attendance->status === 'pending')
                         {{ $attendance->break_start }} ～ {{ $attendance->break_end }}
-                        @else
-                        <input type="time" name="break_start" value="{{ $attendance->break_start }}" class="request__input-time"> ～
-                        <input type="time" name="break_end" value="{{ $attendance->break_end }}" class="request__input-time">
-                        @endif
                     </td>
 
                     <td>
-                        @if($attendance->status === 'pending')
                         {{ $attendance->break2_start ?? '-' }} ～ {{ $attendance->break2_end ?? '-' }}
-                        @else
-                        <input type="time" name="break2_start" value="{{ $attendance->break2_start }}" class="request__input-time"> ～
-                        <input type="time" name="break2_end" value="{{ $attendance->break2_end }}" class="request__input-time">
-                        @endif
                     </td>
 
                     <td>
-                        @if($attendance->status === 'pending')
-                        {{ $attendance->note }}
-                        @else
-                        <textarea name="note" class="request__textarea">{{ $attendance->note }}</textarea>
-                        @endif
+                        {{ $editRequest->reason }}
                     </td>
                 </tr>
                 @endforeach

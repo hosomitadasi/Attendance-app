@@ -19,8 +19,8 @@
             </tr>
             @foreach($users as $user)
             <tr>
-                <td>{{}}</td>
-                <td>{{}}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
                 <td><a href="{{ route('admin.attendance_detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach
