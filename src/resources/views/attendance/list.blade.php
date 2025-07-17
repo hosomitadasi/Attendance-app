@@ -11,27 +11,27 @@
 <div class="center">
     <h2 class="list__title"><span>|</span>勤怠一覧</h2>
     <div class="list__header">
-        <a href="#" class="list__prev">←前月</a>
-        <span class="list__month">2023/06</span>
-        <a href="#" class="list__next">翌月→</a>
+        <a href="?month={{ \Carbon\Carbon::parse($targetMonth)->subMonth()->format('Y-m') }}" class="list__prev">←前月</a>
+        <span class="list__month">{{ \Carbon\Carbon::parse($targetMonth)->format('Y年m月') }}</span>
+        <a href="?month={{ \Carbon\Carbon::parse($targetMonth)->addMonth()->format('Y-m') }}" class="list__next">翌月→</a>
     </div>
     <div class="list__table">
         <table>
             <tr>
-                <th>名前</th>
+                <th>日付</th>
                 <th>出勤</th>
                 <th>退勤</th>
                 <th>休憩</th>
                 <th>合計</th>
                 <th>詳細</th>
             </tr>
-            @foreach()
+            @foreach($attendances as $attendance)
             <tr>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
-                <td>{{}}</td>
+                <td>{{ \Carbon\Carbon::parse($attendance->date)->format('m/d（D）') }}</td>
+                <td>{{ $attendance->start_time }}</td>
+                <td>{{ $attendance->end_time }}</td>
+                <td>{{ $attendance->rest_sum }}</td>
+                <td>{{ $attendance->work_time }}</td>
                 <td><a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a></td>
             </tr>
             @endforeach
