@@ -60,7 +60,7 @@ class AttendanceController extends Controller
             'start_time' => $time,
         ]);
 
-        return redirect('attendance.create')->with('result', '
+        return redirect()->route('attendance.create')->with('result', '
         勤務開始しました');
     }
     // 「出勤」ボタンを押したときの動作。
@@ -75,7 +75,7 @@ class AttendanceController extends Controller
 
         Attendance::where('user_id', $id)->where('date', $date)->update(['end_time' => $time]);
 
-        return redirect('attendance.create')->with('result', '
+        return redirect()->route('attendance.create')->with('result', '
         勤務終了しました');
     }
     // 「退勤」ボタンを押したときの動作。

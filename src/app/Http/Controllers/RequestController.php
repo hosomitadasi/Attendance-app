@@ -36,7 +36,7 @@ class RequestController extends Controller
     {
         $tab = $request->query('tab', 'pending');
 
-        $query = Request::where('user_id', Auth::id());
+        $query = REditRequest::where('user_id', Auth::id());
 
         if ($tab === 'pending') {
             $query->where('status', 'pending');

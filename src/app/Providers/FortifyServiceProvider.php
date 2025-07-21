@@ -43,6 +43,15 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(10)->by($email . $request->ip());
         });
 
+        app()->bind(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->route('attendance.create');
+                }
+            };
+        });
+
         app()->bind(FortifyLoginRequest::class, LoginRequest::class);
     }
 }
