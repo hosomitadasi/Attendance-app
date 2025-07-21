@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>申請一覧</h2>
 
@@ -28,16 +27,16 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($editRequests as $editRequest)
             <tr>
-                @foreach($editRequests as $$editRequest)
                 <td>承認待ち</td>
-                <td>$editRequest->user->name</td>
-                <td>$editRequest->attendance->date</td>
-                <td>$editRequest->reason</td>
-                <td>$editRequest->created_at</td>
-                <td><a href="#">詳細</a></td>
-                @endforeach
+                <td>{{ $editRequest->user->name }}</td>
+                <td>{{ $editRequest->attendance->date }}</td>
+                <td>{{ $editRequest->reason }}</td>
+                <td>{{ $editRequest->created_at }}</td>
+                <td><a href="{{ route('admin.approve', $editRequest->id) }}">詳細</a></td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

@@ -38,7 +38,7 @@ class AdminStaffController extends Controller
     {
         $targetDate = $request->input('date', Carbon::now()->toDateString());
 
-        $attendances = Attendance::with(['users', 'rests'])
+        $attendances = Attendance::with(['user', 'rests'])
             ->where('date', $targetDate) // 例：2023-06-01
             ->get();
         return view('admin.attendance_list', compact('attendances', 'targetDate'));

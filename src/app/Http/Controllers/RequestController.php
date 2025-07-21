@@ -12,7 +12,7 @@ class RequestController extends Controller
 {
     public function getDetail($id)
     {
-        $attendance = Attendance::with('rests', 'users')->findOrFail($id);
+        $attendance = Attendance::with('rests', 'user')->findOrFail($id);
         return view('attendance.detail', compact('attendance'));
     }
 
@@ -26,7 +26,7 @@ class RequestController extends Controller
             'new_start_time' => $request->start_time,
             'new_end_time' => $request->end_time,
             'new_rests' => json_encode($request->rest),
-            'reason' => $request->note,
+            'note' => $request->note,
         ]);
 
         return redirect()->route('attendance.request_list')->with('result', '修正申請を送信しました');
@@ -36,7 +36,7 @@ class RequestController extends Controller
     {
         $tab = $request->query('tab', 'pending');
 
-        $query = EditRequest::where('user_id', Auth::id());
+        $query = Request::where('user_id', Auth::id());
 
         if ($tab === 'pending') {
             $query->where('status', 'pending');

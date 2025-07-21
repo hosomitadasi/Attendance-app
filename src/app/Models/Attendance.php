@@ -26,13 +26,9 @@ class Attendance extends Model
     public static function getAttendance()
     {
         $id = Auth::id();
+        $date = Carbon::now()->toDateString();
 
-        $dt = new Carbon();
-        $date = $dt->toDateString();
-
-        $attendance = Attendance::where('user_id', $id)->where('date', $date)->first();
-
-        return $attendance;
+        return self::with('rests')->where('user_id', $id)->where('date', $date)->first();
     }
 
     public function getRestSumAttribute()

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\EditRequest;
 use App\Models\Attendance;
+use App\Models\EditRequest;
 use App\Models\Rest;
 use Illuminate\Support\Facades\DB;
 
@@ -41,10 +41,9 @@ class AdminRequestController extends Controller
 
             $attendance->start_time = $editRequest->new_start_time;
             $attendance->end_time = $editRequest->new_end_time;
-            $attendance->note = $editRequest->reason;
+            $attendance->note = $editRequest->note;
             $attendance->save();
 
-            // 既存の休憩を削除して新規登録
             $attendance->rests()->delete();
             $newRests = json_decode($editRequest->new_rests, true);
 

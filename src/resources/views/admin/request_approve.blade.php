@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>勤怠詳細</h2>
     <form action="{{ route('admin.approve', $attendance->id) }}" method="POST">
@@ -27,31 +26,17 @@
 
                     <th>備考</th>
                 </tr>
-                @foreach($editRequests as $$editRequest)
+                @foreach($editRequests as $editRequest)
                 <tr>
+                    <td>{{ $editRequest->user->name }}</td>
+                    <td>{{ \Carbon\Carbon::parse($editRequest->attendance->date)->format('Y年 m月d日') }}</td>
+                    <td>{{ $editRequest->new_start_time }} ～ {{ $editRequest->new_end_time }}</td>
                     <td>
-                        {{ $editRequest->user->name }}
+                        @foreach($editRequest->attendance->rests as $rest)
+                        {{ $rest->start_time }} ～ {{ $rest->end_time }}<br>
+                        @endforeach
                     </td>
-
-                    <td>
-                        {{ \Carbon\Carbon::parse(	$editRequest->attendance->date)->format('Y年 m月d日') }}
-                    </td>
-
-                    <td>
-                        {{ $editRequest->new_start_time  }} ～ {{ $editRequest->new_end_time }}
-                    </td>
-
-                    <td>
-                        {{ $attendance->break_start }} ～ {{ $attendance->break_end }}
-                    </td>
-
-                    <td>
-                        {{ $attendance->break2_start ?? '-' }} ～ {{ $attendance->break2_end ?? '-' }}
-                    </td>
-
-                    <td>
-                        {{ $editRequest->reason }}
-                    </td>
+                    <td>{{ $editRequest->reason }}</td>
                 </tr>
                 @endforeach
             </table>

@@ -21,7 +21,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
-                return redirect('/attendance/create');
+                return redirect('/attendance');
             }
         });
     }
@@ -43,7 +43,6 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(10)->by($email . $request->ip());
         });
 
-        //デフォルトのログイン機能にあるフォームリクエストを自作のものに代替するため、サービスコンテナにバインド
         app()->bind(FortifyLoginRequest::class, LoginRequest::class);
     }
 }

@@ -22,7 +22,7 @@ class RestController extends Controller
             'start_time' => $time,
         ]);
 
-        return redirect('attendance/create')->with('result', '
+        return redirect('attendance.create')->with('result', '
         休憩開始しました');
     }
 
@@ -37,7 +37,7 @@ class RestController extends Controller
 
         Rest::where('id', $rest->id)->update(['end_time' => $time]);
 
-        return redirect('attendance/create')->with('result', '
+        return redirect('attendance.create')->with('result', '
         休憩終了しました');
     }
 }

@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>申請一覧</h2>
     <div class="list__tabs">
@@ -25,10 +24,10 @@
 
         @foreach($requests as $request)
         <tr>
-            <td>{{ $editRequest->status }}</td>
-            <td>{{ $editRequest->attendance->date }}</td>
-            <td>{{ $editRequest->reason }}</td>
-            <td>{{ $editRequest->created_at->format('Y/m/d') }}</td>
+            <td>{{ $request->status }}</td>
+            <td>{{ $request->attendance->date }}</td>
+            <td>{{ $request->reason }}</td>
+            <td>{{ $request->created_at->format('Y/m/d') }}</td>
             <td><a href="{{ route('attendance.detail', $request->attendance->id) }}">詳細</a></td>
         </tr>
         @endforeach

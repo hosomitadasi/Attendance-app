@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <div class="mail_notice--div">
         <div class="mail_notice--header">

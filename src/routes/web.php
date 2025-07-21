@@ -36,14 +36,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/attendance', [AttendanceController::class, 'getCreate'])->name('attendance.create');
     // 勤怠登録画面（一般ユーザー）
-    Route::get('/attendance/start', [AttendanceController::class, 'startAttendance']);
+    Route::post('/attendance/start', [AttendanceController::class, 'startAttendance'])->name('attendance.start');
     // 勤務開始処理
-    Route::get('/attendance/end', [AttendanceController::class, 'endAttendance']);
+    Route::post('/attendance/end', [AttendanceController::class, 'endAttendance'])->name('attendance.end');
     // 勤務終了処理
 
-    Route::get('/break/start', [RestController::class, 'startRest']);
+    Route::post('/break/start', [RestController::class, 'startRest'])->name('attendance.break_start');
     // 休憩開始処理
-    Route::get('/break/end', [RestController::class, 'endRest']);
+    Route::post('/break/end', [RestController::class, 'endRest'])->name('attendance.break_end');
     // 休憩終了処理
 
     Route::get('/attendance/list', [AttendanceController::class, 'getList'])->name('attendance.list');
@@ -59,19 +59,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // 一般ユーザー用のミドルウェア
 
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
-
-    Route::post('/attendance/detail/{id}/corrective', [AdminStaffController::class, 'corrective']);
-    // 勤怠修正処理
-
+    Route::get('/attendances', [AdminStaffController::class, 'getList'])->name('admin.attendance_list');
+    // 勤怠一覧画面（管理者）
     Route::get('/staffs', [AdminStaffController::class, 'getStaffList'])->name('admin.staff_list');
     // スタッフ一覧画面（管理者）
     Route::get('/staff/{id}/attendances', [AdminStaffController::class, 'getAttendance'])->name('admin.staff_attendance');
     // スタッフ別勤怠一覧画面表示（管理者）
-
-    Route::get('/attendances', [AdminStaffController::class, 'getList'])->name('admin.attendance_list');
-    // 勤怠一覧画面（管理者）
     Route::get('/attendance/detail/{id}', [AdminStaffController::class, 'getDetail'])->name('admin.attendance_detail');
     // 勤怠詳細画面表示（管理者）
+    Route::post('/attendance/detail/{id}/corrective', [AdminStaffController::class, 'corrective']);
+    // 勤怠修正処理
 
     Route::get('/requests', [AdminRequestController::class, 'getRequest'])->name('admin.request_list');
     // 申請一覧画面（管理者）

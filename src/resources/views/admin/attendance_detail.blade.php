@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>勤怠詳細</h2>
     <form action="{{ route('attendance.update', $attendance->id) }}" method="POST">
@@ -31,7 +30,7 @@
                 @foreach($attendances as $attendance)
                 <tr>
                     <td>
-                        {{ $attendance->users->name }}
+                        {{ $attendance->user->name }}
                     </td>
 
                     <td>

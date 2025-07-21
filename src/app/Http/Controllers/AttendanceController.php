@@ -16,24 +16,30 @@ class AttendanceController extends Controller
 
         if (!empty($attendance)) {
             if (!empty($attendance->end_time)) {
-                // 退勤済
                 $status = 'after_work';
             } else {
                 $rest = $attendance->rests->whereNull("end_time")->first();
 
                 if ($rest) {
-                    // 休憩中
                     $status = 'resting';
                 } else {
-                    // 出勤中
                     $status = 'working';
                 }
             }
         }
 
+        $statusLabels = [
+            'before_work' => '未出勤',
+            'working' => '出勤中',
+            'resting' => '休憩中',
+            'after_work' => '退勤済',
+        ];
+
         return view('attendance.create', [
             'status' => $status,
-            'now' => Carbon::now()->format('Y年m月d日 H:i:s')
+            'statusLabel' => $statusLabels[$status],
+            'date' => Carbon::now()->format('Y年m月d日'),
+            'time' => Carbon::now()->format('H:i'),
         ]);
 
 
@@ -54,7 +60,7 @@ class AttendanceController extends Controller
             'start_time' => $time,
         ]);
 
-        return redirect('attendance/create')->with('result', '
+        return redirect('attendance.create')->with('result', '
         勤務開始しました');
     }
     // 「出勤」ボタンを押したときの動作。
@@ -69,13 +75,24 @@ class AttendanceController extends Controller
 
         Attendance::where('user_id', $id)->where('date', $date)->update(['end_time' => $time]);
 
-        return redirect('attendance/create')->with('result', '
+        return redirect('attendance.create')->with('result', '
         勤務終了しました');
     }
     // 「退勤」ボタンを押したときの動作。
 
-    public function getList()
+    public function getList(Request $request)
     {
-        return view('attendance.list');
+        $targetMonth = $request->input('month', Carbon::now()->format('Y-m'));
+
+        $id = Auth::id();
+        $attendances = Attendance::with('rests')
+            ->where('user_id', $id)
+            ->where('date', 'like', $targetMonth . '%')
+            ->get();
+
+        return view('attendance.list', [
+            'attendances' => $attendances,
+            'targetMonth' => $targetMonth
+        ]);
     }
 }

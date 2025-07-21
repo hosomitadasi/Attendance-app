@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>勤怠一覧</h2>
     <div class="list__header">

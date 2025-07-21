@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     <h2 class="list__title"><span>|</span>スタッフ一覧</h2>
     <div class="list__table">
@@ -21,7 +20,7 @@
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td><a href="{{ route('admin.attendance_detail', $attendance->id) }}">詳細</a></td>
+                <td><a href="{{ route('admin.attendance_detail', $user->id) }}">詳細</a></td>
             </tr>
             @endforeach
         </table>

@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 <div class="center">
     {{-- 勤務状態ラベル --}}
     <div class="status-label">
@@ -22,12 +21,12 @@
 
     {{-- ボタン表示（勤務ステータスによって切り替え） --}}
     <div class="btn-group">
-        @if ($status === '未出勤')
+        @if ($status === 'before_work')
         <form action="{{ route('attendance.start') }}" method="POST">
             @csrf
             <button class="btn">出勤</button>
         </form>
-        @elseif ($status === '出勤中')
+        @elseif ($status === 'working')
         <form action="{{ route('attendance.end') }}" method="POST">
             @csrf
             <button class="btn">退勤</button>
@@ -36,12 +35,12 @@
             @csrf
             <button class="btn">休憩入</button>
         </form>
-        @elseif ($status === '休憩中')
+        @elseif ($status === 'resting')
         <form action="{{ route('attendance.break_end') }}" method="POST">
             @csrf
             <button class="btn">休憩戻</button>
         </form>
-        @elseif ($status === '退勤済')
+        @elseif ($status === 'after_work')
         <p class="thanks-message">お疲れ様でした。</p>
         @endif
     </div>
