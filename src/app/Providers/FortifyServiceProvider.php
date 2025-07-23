@@ -14,6 +14,8 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\LogoutResponse;
 class FortifyServiceProvider extends ServiceProvider
 {
     public function register(): void
@@ -53,5 +55,14 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         app()->bind(FortifyLoginRequest::class, LoginRequest::class);
+
+        app()->singleton(LogoutResponse::class, function () {
+            return new class implements LogoutResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->route('login'); // ログアウト後の画面
+                }
+            };
+        });
     }
 }

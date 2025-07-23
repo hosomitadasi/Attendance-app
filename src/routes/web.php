@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\AttendanceController;
@@ -15,6 +16,10 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 // ログイン画面（一般ユーザー）
 Route::post('/register', [RegisteredUserController::class, 'store']);
 // 会員登録画面（一般ユーザー）
+
+Route::get('admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('admin/login', [AdminLoginController::class, 'login']);
+Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
