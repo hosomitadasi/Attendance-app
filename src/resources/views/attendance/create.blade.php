@@ -27,18 +27,20 @@
             <button class="btn">出勤</button>
         </form>
         @elseif ($status === 'working')
-        <form action="{{ route('attendance.end') }}" method="POST">
-            @csrf
-            <button class="btn">退勤</button>
-        </form>
-        <form action="{{ route('attendance.break_start') }}" method="POST">
-            @csrf
-            <button class="btn">休憩入</button>
-        </form>
+        <div class="btn-group">
+            <form action="{{ route('attendance.end') }}" method="POST">
+                @csrf
+                <button class="btn">退勤</button>
+            </form>
+            <form action="{{ route('attendance.break_start') }}" method="POST">
+                @csrf
+                <button class="btn btn--white">休憩入</button>
+            </form>
+        </div>
         @elseif ($status === 'resting')
         <form action="{{ route('attendance.break_end') }}" method="POST">
             @csrf
-            <button class="btn">休憩戻</button>
+            <button class="btn btn--white">休憩戻</button>
         </form>
         @elseif ($status === 'after_work')
         <p class="thanks-message">お疲れ様でした。</p>

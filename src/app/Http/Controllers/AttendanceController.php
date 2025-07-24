@@ -82,17 +82,34 @@ class AttendanceController extends Controller
 
     public function getList(Request $request)
     {
+        // ① 対象月を取得
         $targetMonth = $request->input('month', Carbon::now()->format('Y-m'));
 
-        $id = Auth::id();
-        $attendances = Attendance::with('rests')
-            ->where('user_id', $id)
-            ->where('date', 'like', $targetMonth . '%')
-            ->get();
+        // ② ユーザーID
+        $userId = Auth::id();
 
+        // ③ その月の開始日・終了日
+        $startOfMonth = Carbon::parse($targetMonth)->startOfMonth();
+        $endOfMonth   = Carbon::parse($targetMonth)->endOfMonth();
+
+        // ④ その月の勤怠を取得し、「日付」をキーにしてコレクション化
+        $attendances = Attendance::with('rests')
+            ->where('user_id', $userId)
+            ->whereBetween('date', [$startOfMonth->toDateString(), $endOfMonth->toDateString()])
+            ->get()
+            ->keyBy('date');
+
+        // ⑤ その月の日付を１日〜末日まで生成
+        $dates = collect();
+        for ($date = $startOfMonth->copy(); $date->lte($endOfMonth); $date->addDay()) {
+            $dates->push($date->copy());
+        }
+
+        // ⑥ ビューへ
         return view('attendance.list', [
+            'dates'       => $dates,
             'attendances' => $attendances,
-            'targetMonth' => $targetMonth
+            'targetMonth' => $targetMonth,
         ]);
     }
 }

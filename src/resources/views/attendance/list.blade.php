@@ -24,14 +24,23 @@
                 <th>合計</th>
                 <th>詳細</th>
             </tr>
-            @foreach($attendances as $attendance)
+            @foreach($dates as $date)
+            @php
+            $attendance = $attendances->get($date->format('Y-m-d'));
+            @endphp
             <tr>
-                <td>{{ \Carbon\Carbon::parse($attendance->date)->format('m/d（D）') }}</td>
-                <td>{{ $attendance->start_time }}</td>
-                <td>{{ $attendance->end_time }}</td>
-                <td>{{ $attendance->rest_sum }}</td>
-                <td>{{ $attendance->work_time }}</td>
-                <td><a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a></td>
+                <td>{{ $date->format('m/d（D）') }}</td>
+                <td>{{ optional($attendance)->start_time ?? '-' }}</td>
+                <td>{{ optional($attendance)->end_time ?? '-' }}</td>
+                <td>{{ optional($attendance)->rest_sum ?? '-' }}</td>
+                <td>{{ optional($attendance)->work_time ?? '-' }}</td>
+                <td>
+                    @if($attendance)
+                    <a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </table>

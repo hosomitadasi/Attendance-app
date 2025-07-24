@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminStaffController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\RestController;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-use App\Http\Requests\EmailVerificationRequest;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
 // ログイン画面（一般ユーザー）
@@ -22,8 +23,13 @@ Route::post('admin/login', [AdminLoginController::class, 'login']);
 Route::post('admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
 Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->name('verification.notice');
+    if ($user = Auth::user()) {
+        $user->sendEmailVerificationNotification();
+        return view('auth.verify-email');
+    }
+
+    return redirect()->route('login');
+})->middleware(['auth'])->name('verification.notice');
 
 Route::post('/email/verification-notification', function (Request $request) {
     session()->get('unauthenticated_user')->sendEmailVerificationNotification();

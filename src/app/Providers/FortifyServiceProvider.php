@@ -18,15 +18,6 @@ use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 class FortifyServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
-            public function toResponse($request)
-            {
-                return redirect('/attendance');
-            }
-        });
-    }
 
     public function boot(): void
     {
