@@ -46,7 +46,7 @@ class AdminStaffController extends Controller
 
     public function getDetail($id)
     {
-        $attendance = Attendance::with(['users', 'rests'])
+        $attendance = Attendance::with(['user', 'rests'])
             ->findOrFail($id);
 
         return view('admin.attendance_detail', compact('attendance'));

@@ -1,4 +1,6 @@
 @extends('layouts.default')
+@section('no_header')
+@endsection
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/css/authentication.css')  }}">

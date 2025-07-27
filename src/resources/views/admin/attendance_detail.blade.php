@@ -30,7 +30,7 @@
                 @foreach($attendances as $attendance)
                 <tr>
                     <td>
-                        {{ $attendance->user->name }}
+                        {{ $attendance->use->name ?? '-' }}
                     </td>
 
                     <td>

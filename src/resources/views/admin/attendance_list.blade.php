@@ -28,7 +28,7 @@
             </tr>
             @foreach($attendances as $attendance)
             <tr>
-                <td>{{ $attendance->users->name }}</td>
+                <td>{{ $attendance->user->name ?? '-' }}</td>
                 <td>{{ $attendance->start_time }}</td>
                 <td>{{ $attendance->end_time }}</td>
                 <td>{{ $attendance->rest_sum }}</td>

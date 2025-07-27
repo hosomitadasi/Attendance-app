@@ -32,15 +32,20 @@ Route::get('/email/verify', function () {
 })->middleware(['auth'])->name('verification.notice');
 
 Route::post('/email/verification-notification', function (Request $request) {
-    session()->get('unauthenticated_user')->sendEmailVerificationNotification();
-    session()->put('resent', true);
-    return back()->with('message', 'Verification link sent!');
-})->name('verification.send');
+    $user = Auth::user();
+
+    if ($user && !$user->hasVerifiedEmail()) {
+        $user->sendEmailVerificationNotification();
+        return back()->with('resent', true);
+    }
+
+    return back()->withErrors(['message' => '認証済みのユーザーか、ログイン状態を確認してください。']);
+})->middleware('auth')->name('verification.send');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     session()->forget('unauthenticated_user');
-    return redirect('/attendance/create');
+    return redirect()->route('attendance.create');
 })->name('verification.verify');
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -13,7 +13,11 @@
 </head>
 
 <body>
+    @hasSection('no_header')
+    @else
     @include('components.header')
+    @endif
+
     @yield('content')
 </body>
 

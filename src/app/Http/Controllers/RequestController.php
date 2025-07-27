@@ -12,7 +12,12 @@ class RequestController extends Controller
 {
     public function getDetail($id)
     {
-        $attendance = Attendance::with('rests', 'user')->findOrFail($id);
+        $attendance = Attendance::with('rests', 'user')->find($id);
+
+        if (!$attendance) {
+            abort(404, '該当の勤怠データが見つかりません');
+        }
+
         return view('attendance.detail', compact('attendance'));
     }
 
@@ -36,7 +41,7 @@ class RequestController extends Controller
     {
         $tab = $request->query('tab', 'pending');
 
-        $query = REditRequest::where('user_id', Auth::id());
+        $query = EditRequest::where('user_id', Auth::id());
 
         if ($tab === 'pending') {
             $query->where('status', 'pending');
