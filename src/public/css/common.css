@@ -4,6 +4,7 @@
 
 body {
     width: 100vw;
+    background-color: #f4f4f4;
 }
 
 header {
@@ -123,9 +124,11 @@ header {
 }
 
 .center {
-    width: 680px;
-    margin: 0 auto;
-    padding: 50px 0;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .page__title {

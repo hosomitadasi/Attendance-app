@@ -10,8 +10,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 18px;
+}
+
+.list__prev,
+.list__next {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.list__prev:hover,
+.list__next:hover {
+    background-color: #eee;
 }
 
 .list__month {
@@ -26,15 +41,15 @@
 
 .list__table th,
 .list__table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     font-size: 14px;
+    border-bottom: 1px solid #eee;
 }
 
 .list__table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+    background-color: #fafafa;
+    font-weight: 600;
 }
 
 .list__table tr:hover {
