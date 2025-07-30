@@ -20,7 +20,7 @@ class AdminRequestController extends Controller
 
         $approvedRequests = EditRequest::with(['user', 'attendance'])
             ->where('status', 'approved')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return view('admin.request_list', compact('pendingRequests', 'approvedRequests'));

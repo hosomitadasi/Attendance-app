@@ -36,7 +36,7 @@
                 <td>{{ optional($attendance)->work_time ?? '-' }}</td>
                 <td>
                     @if($attendance)
-                    <a href="{{ route('attendance.detail', $attendance->id) }}">詳細</a>
+                    <a href="{{ route('admin.attendance_detail', $attendance->id) }}">詳細</a>
                     @else
                     -
                     @endif

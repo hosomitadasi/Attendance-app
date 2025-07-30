@@ -20,7 +20,7 @@
     @elseif (Auth::user()->role === 'admin')
     <nav class="header__nav">
         <ul>
-            <li><a href="{{ route('admin.attendance_list') }}">勤怠一覧</a></li>
+            <li><a href="{{ route('admin.attendance_list', ['date' => \Carbon\Carbon::now()->toDateString()]) }}">勤怠一覧</a></li>
             <li><a href="{{ route('admin.staff_list') }}">スタッフ一覧</a></li>
             <li><a href="{{ route('admin.request_list') }}">申請一覧</a></li>
             <li>

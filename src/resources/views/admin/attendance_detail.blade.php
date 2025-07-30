@@ -16,15 +16,10 @@
             <table>
                 <tr>
                     <th>名前</th>
-
                     <th>日付</th>
-
                     <th>出勤・退勤</th>
-
                     <th>休憩</th>
-
                     <th>休憩２</th>
-
                     <th>備考</th>
                 </tr>
                 @foreach($attendances as $attendance)
@@ -32,11 +27,9 @@
                     <td>
                         {{ $attendance->use->name ?? '-' }}
                     </td>
-
                     <td>
                         {{ \Carbon\Carbon::parse($attendance->date)->format('Y年 m月d日') }}
                     </td>
-
                     <td>
                         @if($attendance->status === 'pending')
                         {{ $attendance->start_time }} ～ {{ $attendance->end_time }}
@@ -45,7 +38,6 @@
                         <input type="time" name="end_time" value="{{ $attendance->end_time }}" class="request__input-time">
                         @endif
                     </td>
-
                     <td>
                         @if($attendance->status === 'pending')
                         {{ $attendance->break_start }} ～ {{ $attendance->break_end }}
@@ -54,7 +46,6 @@
                         <input type="time" name="break_end" value="{{ $attendance->break_end }}" class="request__input-time">
                         @endif
                     </td>
-
                     <td>
                         @if($attendance->status === 'pending')
                         {{ $attendance->break2_start ?? '-' }} ～ {{ $attendance->break2_end ?? '-' }}
@@ -63,7 +54,6 @@
                         <input type="time" name="break2_end" value="{{ $attendance->break2_end }}" class="request__input-time">
                         @endif
                     </td>
-
                     <td>
                         @if($attendance->status === 'pending')
                         {{ $attendance->note }}

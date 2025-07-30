@@ -12,7 +12,7 @@ class AdminStaffController extends Controller
 {
     public function getStaffList()
     {
-        $users = User::all();
+        $users = User::where('role', 'user')->get(); // 管理者を除外
         return view('admin.staff_list', compact('users'));
     }
 
@@ -39,8 +39,9 @@ class AdminStaffController extends Controller
         $targetDate = $request->input('date', Carbon::now()->toDateString());
 
         $attendances = Attendance::with(['user', 'rests'])
-            ->where('date', $targetDate) // 例：2023-06-01
+            ->where('date', $targetDate)
             ->get();
+
         return view('admin.attendance_list', compact('attendances', 'targetDate'));
     }
 

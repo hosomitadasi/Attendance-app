@@ -41,7 +41,7 @@
 
 .list__table th,
 .list__table td {
-    padding: 15px;
+    padding:12px 15px;
     text-align: center;
     font-size: 14px;
     border-bottom: 1px solid #eee;
@@ -49,24 +49,41 @@
 
 .list__table th {
     background-color: #fafafa;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .list__table tr:hover {
     background-color: #f9f9f9;
 }
 
-.list__tabs {
+.tabs {
     display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-.list__tab {
-    margin-right: 20px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-bottom: 2px solid transparent;
+.tab-button {
+    padding: 10px 30px;
+    font-size: 14px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    margin: 0 5px;
     cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+}
+
+.tab-button.active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 .list__tab--active {
