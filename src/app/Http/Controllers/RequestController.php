@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\EditRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\EditRequestForm;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -21,16 +21,16 @@ class RequestController extends Controller
         return view('attendance.detail', compact('attendance'));
     }
 
-    public function corrective(Request $request, $id)
+    public function corrective(EditRequestForm $request, $id)
     {
         $attendance = Attendance::findOrFail($id);
 
         EditRequest::create([
             'attendance_id' => $attendance->id,
             'user_id' => Auth::id(),
-            'new_start_time' => $request->start_time,
-            'new_end_time' => $request->end_time,
-            'new_rests' => json_encode($request->rest),
+            'new_start_time' => $request->new_start_time,
+            'new_end_time' => $request->new_end_time,
+            'new_rests' => json_encode($request->new_rests),
             'note' => $request->note,
         ]);
 

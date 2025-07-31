@@ -20,7 +20,7 @@ class EditRequestForm extends FormRequest
             'new_rests' => ['nullable', 'array'],
             'new_rests.*.start_time' => ['required_with:new_rests.*.end_time', 'date_format:H:i'],
             'new_rests.*.end_time' => ['required_with:new_rests.*.start_time', 'date_format:H:i'],
-            'reason' => ['required', 'string'],
+            'note' => ['required', 'string'],
         ];
     }
 
@@ -63,7 +63,7 @@ class EditRequestForm extends FormRequest
             'new_rests.*.start_time.date_format' => '休憩開始時間の形式が正しくありません（例：12:00）',
             'new_rests.*.end_time.date_format' => '休憩終了時間の形式が正しくありません（例：13:00）',
 
-            'reason.required' => '備考を記入してください',
+            'note.required' => '備考を記入してください',
         ];
     }
 }

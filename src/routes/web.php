@@ -66,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 勤怠一覧画面（一般ユーザー）
     Route::get('/attendance/{id}', [RequestController::class, 'getDetail'])->name('attendance.detail');
     // 勤怠詳細画面（一般ユーザー）
-    Route::post('/attendance/{id}', [RequestController::class, 'corrective']);
+    Route::post('/attendance/{id}', [RequestController::class, 'corrective'])->name('attendance.update');
     // 勤怠修正処理
 
     Route::get('/attendance/request_list', [RequestController::class, 'getRequest'])->name('attendance.request_list');

@@ -30,7 +30,7 @@
                 <td>{{ $editRequest->attendance->date }}</td>
                 <td>{{ $editRequest->reason }}</td>
                 <td>{{ $editRequest->created_at->format('Y/m/d H:i') }}</td>
-                <td><a href="{{ route('admin.request_approve', $editRequest->id) }}">詳細</a></td>
+                <td><a href="{{ route('attendance.detail', $editRequest->id) }}">詳細</a></td>
             </tr>
             @endforeach
         </table>
@@ -51,7 +51,7 @@
                 <td>{{ $editRequest->attendance->date }}</td>
                 <td>{{ $editRequest->reason }}</td>
                 <td>{{ $editRequest->updated_at->format('Y/m/d H:i') }}</td>
-                <td><a href="{{ route('admin.request_approve', $editRequest->id) }}">詳細</a></td>
+                <td><a href="{{ route('attendance.detail', $editRequest->id) }}">詳細</a></td>
             </tr>
             @endforeach
         </table>
