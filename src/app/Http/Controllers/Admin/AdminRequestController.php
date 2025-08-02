@@ -33,31 +33,32 @@ class AdminRequestController extends Controller
         return view('admin.request_approve', compact('editRequest', 'newRests'));
     }
 
-    public function approve(Request $request, $id)
+    public function approve($id)
     {
-        DB::transaction(function () use ($id) {
-            $editRequest = EditRequest::findOrFail($id);
-            $attendance = $editRequest->attendance;
+        $editRequest = EditRequest::findOrFail($id);
+        $attendance = $editRequest->attendance;
 
+        if ($editRequest->new_start_time) {
             $attendance->start_time = $editRequest->new_start_time;
+        }
+        if ($editRequest->new_end_time) {
             $attendance->end_time = $editRequest->new_end_time;
-            $attendance->note = $editRequest->note;
-            $attendance->save();
-
+        }
+        if (!empty($editRequest->new_rests)) {
+            // 既存の休憩を削除し、新しく登録
             $attendance->rests()->delete();
-            $newRests = json_decode($editRequest->new_rests, true);
-
-            foreach ($newRests as $restData) {
+            foreach ($editRequest->new_rests as $rest) {
                 $attendance->rests()->create([
-                    'start_time' => $restData['start_time'],
-                    'end_time' => $restData['end_time'],
+                    'start_time' => $rest['start_time'],
+                    'end_time' => $rest['end_time'],
                 ]);
             }
+        }
 
-            $editRequest->status = 'approved';
-            $editRequest->save();
-        });
+        $attendance->save();
+        $editRequest->status = 'approved';
+        $editRequest->save();
 
-        return redirect()->route('admin.request_list')->with('message', '申請を承認しました');
+        return redirect()->back()->with('success', '申請を承認しました。');
     }
 }

@@ -19,13 +19,17 @@ class EditRequest extends Model
         'status'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $casts = [
+        'new_rests' => 'array',
+    ];
 
     public function attendance()
     {
         return $this->belongsTo(Attendance::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

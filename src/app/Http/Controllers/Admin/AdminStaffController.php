@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Attendance;
+use App\Models\EditRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class AdminStaffController extends Controller
@@ -53,22 +56,20 @@ class AdminStaffController extends Controller
         return view('admin.attendance_detail', compact('attendance'));
     }
 
-    public function corrective(Request $request, $id)
+    public function corrective(EditRequestForm $request, $id)
     {
         $attendance = Attendance::findOrFail($id);
-        $attendance->start_time = $request->start_time;
-        $attendance->end_time = $request->end_time;
-        $attendance->note = $request->note;
-        $attendance->save();
 
-        foreach ($attendance->rests as $i => $rest) {
-            if (isset($request->break_start[$i]) && isset($request->break_end[$i])) {
-                $rest->start_time = $request->break_start[$i];
-                $rest->end_time = $request->break_end[$i];
-                $rest->save();
-            }
-        }
+        EditRequest::create([
+            'attendance_id' => $attendance->id,
+            'user_id' => Auth::id(),
+            'new_start_time' => $request->input('new_start_time'),
+            'new_end_time' => $request->input('new_end_time'),
+            'new_rests' => $request->input('new_rests'),
+            'note' => $request->input('note'),
+            'status' => 'pending',
+        ]);
 
-        return redirect()->route('admin.attendance_detail', $id)->with('message', '修正しました');
+        return redirect()->route('attendance.index')->with('success', '修正申請を送信しました。');
     }
 }

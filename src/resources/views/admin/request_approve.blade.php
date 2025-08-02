@@ -22,8 +22,6 @@
 
                     <th>休憩</th>
 
-                    <th>休憩２</th>
-
                     <th>備考</th>
                 </tr>
                 @foreach($editRequests as $editRequest)
@@ -36,7 +34,7 @@
                         {{ $rest->start_time }} ～ {{ $rest->end_time }}<br>
                         @endforeach
                     </td>
-                    <td>{{ $editRequest->reason }}</td>
+                    <td>{{ $editRequest->note }}</td>
                 </tr>
                 @endforeach
             </table>

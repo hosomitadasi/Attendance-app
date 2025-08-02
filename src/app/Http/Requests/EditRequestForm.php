@@ -12,15 +12,22 @@ class EditRequestForm extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'new_start_time' => ['required', 'date_format:H:i'],
-            'new_end_time' => ['required', 'date_format:H:i'],
-            'new_rests' => ['nullable', 'array'],
-            'new_rests.*.start_time' => ['required_with:new_rests.*.end_time', 'date_format:H:i'],
-            'new_rests.*.end_time' => ['required_with:new_rests.*.start_time', 'date_format:H:i'],
-            'note' => ['required', 'string'],
+            'new_start_time' => 'nullable|date_format:H:i',
+            'new_end_time' => 'nullable|date_format:H:i|after:new_start_time',
+            'new_rests' => 'nullable|array',
+            'new_rests.*.start_time' => 'nullable|date_format:H:i',
+            'new_rests.*.end_time' => 'nullable|date_format:H:i|after:new_rests.*.start_time',
+            'note' => 'required|string|max:1000',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'note.required' => '備考を記入してください。',
         ];
     }
 
@@ -50,20 +57,5 @@ class EditRequestForm extends FormRequest
                 }
             }
         });
-    }
-
-    public function messages(): array
-    {
-        return [
-            'new_start_time.required' => '出勤時間を入力してください',
-            'new_end_time.required' => '退勤時間を入力してください',
-            'new_start_time.date_format' => '出勤時間の形式が正しくありません（例：09:00）',
-            'new_end_time.date_format' => '退勤時間の形式が正しくありません（例：18:00）',
-
-            'new_rests.*.start_time.date_format' => '休憩開始時間の形式が正しくありません（例：12:00）',
-            'new_rests.*.end_time.date_format' => '休憩終了時間の形式が正しくありません（例：13:00）',
-
-            'note.required' => '備考を記入してください',
-        ];
     }
 }

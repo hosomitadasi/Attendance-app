@@ -28,13 +28,14 @@ class RequestController extends Controller
         EditRequest::create([
             'attendance_id' => $attendance->id,
             'user_id' => Auth::id(),
-            'new_start_time' => $request->new_start_time,
-            'new_end_time' => $request->new_end_time,
-            'new_rests' => json_encode($request->new_rests),
-            'note' => $request->note,
+            'new_start_time' => $request->input('new_start_time'),
+            'new_end_time' => $request->input('new_end_time'),
+            'new_rests' => $request->input('new_rests'),
+            'note' => $request->input('note'),
+            'status' => 'pending',
         ]);
 
-        return redirect()->route('attendance.request_list')->with('result', '修正申請を送信しました');
+        return redirect()->route('attendance.index')->with('success', '修正申請を送信しました。');
     }
 
     public function getRequest(Request $request)

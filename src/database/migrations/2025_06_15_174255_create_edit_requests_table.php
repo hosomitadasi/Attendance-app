@@ -17,7 +17,7 @@ class CreateEditRequestsTable extends Migration
             $table->time('new_end_time')->nullable();
             $table->json('new_rests')->nullable();
             $table->text('note');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
